@@ -1,10 +1,11 @@
 const express = require("express");
-const models = require('./models')
+const models = require("./models");
 const expressGraphQL = require("express-graphql");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-require('dotenv').config()
-const schema = require('./schema/schema')
+const cors = require("cors");
+require("dotenv").config();
+const schema = require("./schema/schema");
 
 const app = express();
 
@@ -25,6 +26,7 @@ mongoose.connection.on("connected", mongoConnected);
 mongoose.connection.on("disconnected", mongoDisconnected);
 mongoose.connection.on("error", mongoError);
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(
   "/graphql",
